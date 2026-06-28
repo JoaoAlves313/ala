@@ -1,0 +1,6 @@
+{
+  "name": "The GoodTube",
+  "description": "Search YouTube and discover courses.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
