@@ -4,7 +4,7 @@
  */
 
 import { useState } from 'react';
-import { Search, GraduationCap, Youtube } from 'lucide-react';
+import { Search, GraduationCap, Youtube, Crown } from 'lucide-react';
 import { motion } from 'motion/react';
 
 export default function App() {
@@ -68,6 +68,13 @@ export default function App() {
           transition={{ delay: 0.3, duration: 0.5 }}
           className="flex flex-wrap gap-4 mt-4 justify-center"
         >
+          <button
+            onClick={() => window.open('https://www.chess.com', '_blank')}
+            className="flex items-center gap-2 bg-[#222222] hover:bg-[#303030] px-5 py-3 rounded-xl font-medium transition-all border border-[#303030] hover:border-gray-500"
+          >
+            <Crown className="w-5 h-5 text-yellow-400" />
+            <span>Play Chess</span>
+          </button>
           <button
             onClick={handleCoursesRedirect}
             className="flex items-center gap-2 bg-[#222222] hover:bg-[#303030] px-5 py-3 rounded-xl font-medium transition-all border border-[#303030] hover:border-gray-500"
