@@ -314,53 +314,72 @@ export function DayStreakView() {
 
       {/* Main Big Circle Button Section */}
       {activeStreak && (
-        <div className="flex-1 flex flex-col items-center justify-center py-6 min-h-[420px]">
+        <div className="flex-1 flex flex-col items-center justify-start py-4 w-full max-w-2xl mx-auto">
           
-          {/* Streak Stats Badge Bar */}
-          <div className="flex items-center justify-center gap-6 mb-10 w-full max-w-md">
-            <div className="flex-1 bg-[#141414] border border-[#222] rounded-2xl p-4 text-center shadow-lg">
-              <div className="text-xs text-gray-400 font-medium mb-1 flex items-center justify-center gap-1">
-                <Flame className="w-3.5 h-3.5 text-orange-500" />
-                Current Streak
+          {/* Streak Stats Badge Cards */}
+          <div className="grid grid-cols-2 gap-4 w-full max-w-md mx-auto mb-8 relative z-10">
+            <div className="bg-[#141414] border border-[#222] rounded-2xl p-4 text-center shadow-lg relative overflow-hidden">
+              <div className="text-xs text-gray-400 font-medium mb-1.5 flex items-center justify-center gap-1.5">
+                <Flame className="w-4 h-4 text-orange-500" />
+                <span>Current Streak</span>
               </div>
-              <div className="text-3xl font-extrabold text-white">
-                {currentStreak} <span className="text-sm font-normal text-gray-400">days</span>
+              <div className="text-2xl md:text-3xl font-extrabold text-white flex items-baseline justify-center gap-1">
+                <span>{currentStreak}</span>
+                <span className="text-xs font-normal text-gray-400">days</span>
               </div>
             </div>
 
-            <div className="flex-1 bg-[#141414] border border-[#222] rounded-2xl p-4 text-center shadow-lg">
-              <div className="text-xs text-gray-400 font-medium mb-1 flex items-center justify-center gap-1">
-                <Award className="w-3.5 h-3.5 text-yellow-500" />
-                Best Streak
+            <div className="bg-[#141414] border border-[#222] rounded-2xl p-4 text-center shadow-lg relative overflow-hidden">
+              <div className="text-xs text-gray-400 font-medium mb-1.5 flex items-center justify-center gap-1.5">
+                <Award className="w-4 h-4 text-yellow-500" />
+                <span>Best Streak</span>
               </div>
-              <div className="text-3xl font-extrabold text-white">
-                {maxStreak} <span className="text-sm font-normal text-gray-400">days</span>
+              <div className="text-2xl md:text-3xl font-extrabold text-white flex items-baseline justify-center gap-1">
+                <span>{maxStreak}</span>
+                <span className="text-xs font-normal text-gray-400">days</span>
               </div>
             </div>
           </div>
 
+          {/* Celebration Indicator */}
+          <div className="h-8 mb-2 flex items-center justify-center">
+            <AnimatePresence>
+              {justApproved && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10, scale: 0.9 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  className="bg-emerald-500 text-white font-bold px-4 py-1.5 rounded-full text-xs md:text-sm flex items-center gap-1.5 shadow-xl border border-emerald-300"
+                >
+                  <Sparkles className="w-4 h-4" />
+                  <span>Streak Approved for Today! 🔥</span>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
           {/* THE BIG CIRCLE BUTTON */}
-          <div className="relative flex flex-col items-center justify-center my-4">
+          <div className="relative flex flex-col items-center justify-center my-4 py-2 z-10">
             
-            {/* Outer Glow Ring */}
+            {/* Outer Glow Ring - positioned behind button */}
             <div 
-              className={`absolute inset-0 rounded-full blur-2xl transition-all duration-700 pointer-events-none ${
+              className={`w-52 h-52 md:w-60 md:h-60 absolute rounded-full blur-3xl transition-all duration-700 pointer-events-none -z-10 ${
                 isApprovedToday 
-                  ? 'bg-emerald-500/30 scale-125' 
-                  : 'bg-orange-500/20 scale-110 hover:bg-orange-500/30'
+                  ? 'bg-emerald-500/25 scale-110' 
+                  : 'bg-orange-500/20 scale-105'
               }`} 
             />
 
             <motion.button
               onClick={handleToggleToday}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              animate={justApproved ? { scale: [1, 1.15, 1] } : {}}
-              transition={{ duration: 0.4 }}
-              className={`relative w-56 h-56 md:w-64 md:h-64 rounded-full flex flex-col items-center justify-center p-6 text-center shadow-2xl transition-all duration-500 cursor-pointer border-4 select-none ${
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.96 }}
+              animate={justApproved ? { scale: [1, 1.1, 1] } : {}}
+              transition={{ duration: 0.3 }}
+              className={`relative w-52 h-52 md:w-60 md:h-60 rounded-full flex flex-col items-center justify-center p-6 text-center shadow-2xl transition-all duration-500 cursor-pointer border-4 select-none ${
                 isApprovedToday
-                  ? 'bg-gradient-to-br from-emerald-600 to-teal-800 border-emerald-400 shadow-[0_0_50px_rgba(16,185,129,0.4)]'
-                  : 'bg-gradient-to-br from-orange-600 via-red-600 to-amber-700 border-orange-400 shadow-[0_0_50px_rgba(249,115,22,0.4)] hover:shadow-[0_0_70px_rgba(249,115,22,0.6)]'
+                  ? 'bg-gradient-to-br from-emerald-600 to-teal-800 border-emerald-400 shadow-[0_0_40px_rgba(16,185,129,0.35)]'
+                  : 'bg-gradient-to-br from-orange-600 via-red-600 to-amber-700 border-orange-400 shadow-[0_0_40px_rgba(249,115,22,0.35)] hover:shadow-[0_0_60px_rgba(249,115,22,0.5)]'
               }`}
             >
               {isApprovedToday ? (
@@ -370,9 +389,9 @@ export function DayStreakView() {
                     animate={{ scale: 1 }}
                     transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                   >
-                    <Check className="w-20 h-20 text-white stroke-[3] mb-1" />
+                    <Check className="w-16 h-16 md:w-20 md:h-20 text-white stroke-[3] mb-1" />
                   </motion.div>
-                  <span className="text-xl font-black text-white uppercase tracking-wider">
+                  <span className="text-lg md:text-xl font-black text-white uppercase tracking-wider">
                     APPROVED
                   </span>
                   <span className="text-xs text-emerald-200 mt-1 font-medium">
@@ -381,8 +400,8 @@ export function DayStreakView() {
                 </>
               ) : (
                 <>
-                  <Flame className="w-16 h-16 text-amber-200 mb-2 animate-pulse" fill="currentColor" />
-                  <span className="text-xl font-black text-white uppercase tracking-wider leading-tight">
+                  <Flame className="w-14 h-14 md:w-16 md:h-16 text-amber-200 mb-2 animate-pulse" fill="currentColor" />
+                  <span className="text-lg md:text-xl font-black text-white uppercase tracking-wider leading-tight">
                     APPROVE TODAY
                   </span>
                   <span className="text-xs text-orange-200/90 mt-1 font-medium">
@@ -391,25 +410,10 @@ export function DayStreakView() {
                 </>
               )}
             </motion.button>
-
-            {/* Sparkles celebration indicator */}
-            <AnimatePresence>
-              {justApproved && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: -20 }}
-                  exit={{ opacity: 0 }}
-                  className="absolute -top-12 bg-emerald-500 text-white font-bold px-4 py-1.5 rounded-full text-sm flex items-center gap-1.5 shadow-xl border border-emerald-300"
-                >
-                  <Sparkles className="w-4 h-4" />
-                  Streak Approved for Today! 🔥
-                </motion.div>
-              )}
-            </AnimatePresence>
           </div>
 
           {/* 7-Day History Track */}
-          <div className="mt-12 bg-[#141414] border border-[#222] rounded-2xl p-5 w-full max-w-md shadow-lg">
+          <div className="mt-8 bg-[#141414] border border-[#222] rounded-2xl p-5 w-full max-w-md shadow-lg relative z-10">
             <div className="flex items-center justify-between mb-3 text-xs text-gray-400 font-medium">
               <span className="flex items-center gap-1.5">
                 <Calendar className="w-3.5 h-3.5 text-gray-500" />

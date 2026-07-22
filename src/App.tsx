@@ -251,54 +251,56 @@ export default function App() {
       <div className="flex-1 flex flex-col h-full overflow-hidden relative bg-[#0a0a0a]">
         
         {/* Top Header / Search Bar */}
-        <div className="p-6 border-b border-[#222] bg-[#0a0a0a]/80 backdrop-blur-xl z-10">
-          <div className="max-w-4xl mx-auto flex flex-col items-center">
-            <form onSubmit={handleSearch} className="w-full relative group shadow-xl">
-              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-gray-500 group-focus-within:text-red-500 transition-colors">
-                <Search className="w-5 h-5" />
+        <div className="px-6 py-4 border-b border-[#222] bg-[#0a0a0a]/80 backdrop-blur-xl z-10">
+          <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            
+            {/* Search Input */}
+            <form onSubmit={handleSearch} className="w-full md:w-96 relative group shadow-xl">
+              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-500 group-focus-within:text-red-500 transition-colors">
+                <Search className="w-4 h-4" />
               </div>
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search YouTube..."
-                className="w-full bg-[#141414] border border-[#2a2a2a] rounded-full py-3 pl-12 pr-28 text-base focus:outline-none focus:border-red-500/50 focus:ring-1 focus:ring-red-500/50 transition-all text-white placeholder-gray-500"
+                className="w-full bg-[#141414] border border-[#2a2a2a] rounded-full py-2 pl-10 pr-24 text-sm focus:outline-none focus:border-red-500/50 focus:ring-1 focus:ring-red-500/50 transition-all text-white placeholder-gray-500"
               />
               <button
                 type="submit"
                 disabled={!searchQuery.trim()}
-                className="absolute right-1.5 top-1.5 bottom-1.5 px-6 bg-[#2a2a2a] hover:bg-[#333] disabled:opacity-50 disabled:hover:bg-[#2a2a2a] rounded-full font-medium transition-colors border border-[#333] text-sm text-gray-200"
+                className="absolute right-1 top-1 bottom-1 px-4 bg-[#2a2a2a] hover:bg-[#333] disabled:opacity-50 disabled:hover:bg-[#2a2a2a] rounded-full font-medium transition-colors border border-[#333] text-xs text-gray-200"
               >
                 Search
               </button>
             </form>
 
             {/* Quick Links Header */}
-            <div className="flex flex-wrap gap-4 mt-6 justify-center">
+            <div className="flex flex-wrap gap-2.5 items-center justify-center">
               <button
                 onClick={() => window.open('https://www.chess.com', '_blank')}
-                className="flex items-center gap-2 bg-[#141414] hover:bg-[#222] px-4 py-2 rounded-xl font-medium transition-all border border-[#2a2a2a] hover:border-[#444] text-gray-300"
+                className="flex items-center gap-2 bg-[#141414] hover:bg-[#222] px-3.5 py-1.5 rounded-xl font-medium transition-all border border-[#2a2a2a] hover:border-[#444] text-gray-300 text-xs"
               >
-                <Crown className="w-4 h-4 text-yellow-500" />
-                <span className="text-sm">Play Chess</span>
+                <Crown className="w-3.5 h-3.5 text-yellow-500" />
+                <span>Play Chess</span>
               </button>
               <button
                 onClick={handleCoursesRedirect}
-                className="flex items-center gap-2 bg-[#141414] hover:bg-[#222] px-4 py-2 rounded-xl font-medium transition-all border border-[#2a2a2a] hover:border-[#444] text-gray-300"
+                className="flex items-center gap-2 bg-[#141414] hover:bg-[#222] px-3.5 py-1.5 rounded-xl font-medium transition-all border border-[#2a2a2a] hover:border-[#444] text-gray-300 text-xs"
               >
-                <GraduationCap className="w-4 h-4 text-blue-400" />
-                <span className="text-sm">Discover Courses</span>
+                <GraduationCap className="w-3.5 h-3.5 text-blue-400" />
+                <span>Discover Courses</span>
               </button>
               <button
-                onClick={() => setCurrentView('streak')}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl font-medium transition-all border ${
+                onClick={() => setCurrentView(currentView === 'streak' ? 'library' : 'streak')}
+                className={`flex items-center gap-2 px-3.5 py-1.5 rounded-xl font-medium transition-all border text-xs ${
                   currentView === 'streak'
                     ? 'bg-orange-500/20 border-orange-500 text-orange-400 shadow-md shadow-orange-950/40'
                     : 'bg-[#141414] hover:bg-[#222] border-[#2a2a2a] hover:border-[#444] text-gray-300'
                 }`}
               >
-                <Flame className="w-4 h-4 text-orange-500" />
-                <span className="text-sm">Day Streak</span>
+                <Flame className="w-3.5 h-3.5 text-orange-500" />
+                <span>{currentView === 'streak' ? 'Libraries' : 'Day Streak'}</span>
               </button>
             </div>
           </div>
